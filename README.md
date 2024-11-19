@@ -85,4 +85,6 @@ Syntax highlight for Neovim:
 Syntax highlight for VS Code:
 > Comming soon!
 
-[LICENSE]()
+---
+
+[LICENSE GNU GPLv3](./LICENSE)
