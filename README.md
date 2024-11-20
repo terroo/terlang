@@ -78,7 +78,7 @@ ter> exit
 
 Windows:
 ```bash
-Invoke-WebRequest -Uri "https://github.com/terroo/terlang/releases/download/0.0.1/terlang-windows-0.0.1.zip"
+Invoke-WebRequest -Uri "https://github.com/terroo/terlang/releases/download/v0.0.1/terlang-windows-0.0.1.zip"
 ```
 + Unzip
 + Create folders and subfolders: `C:\Program Files\Terlang\bin`
@@ -87,7 +87,7 @@ Invoke-WebRequest -Uri "https://github.com/terroo/terlang/releases/download/0.0.
 
 Ubuntu:
 ```bash
-wget https://github.com/terroo/terlang/releases/download/0.0.1/terlang-ubuntu-24-04-0.0.1.zip
+wget https://github.com/terroo/terlang/releases/download/v0.0.1/terlang-ubuntu-24-04-0.0.1.zip
 unzip terlang-ubuntu-24-04-0.0.1.zip
 sudo mv ter /usr/local/bin
 ```
@@ -103,7 +103,137 @@ ter> exit
 ---
 
 ## Using
-COMMING SOON
+> `vim hello.ter`
+
+#### 01. Hello, World!
+```cpp
+// Comment line
+auto hello = "Hello, Terlang! 😃 ";
+output(hello);
+/*
+  Multiline
+  comments
+*/
+```
+> Semicolon is optional: `auto hello = "Hello, Terlang!"`. Literally skipping the line: `out("Hello\n")`
+
+Run:
+```bash
+ter hello.ter
+```
+> Output: `Hello, Terlang! 😃`
+
+#### 02. Arrays
+```cpp
+auto list = {13, 2, 8, 4, 17, 12, 11, 9};
+output(list[6]); // 11
+```
+
+#### 03. Loops
+```cpp
+for(auto i = 0; i < 5; ++i){ // Or i++
+  out(to_string(i) + " | ")
+}
+out("\n")
+// 0 | 1 | 2 | 3 | 4 |
+
+
+auto i = 0;
+while(i < 5){
+  out(to_string(i) + " | ")
+  ++i;
+}
+out("\n")
+// 0 | 1 | 2 | 3 | 4 |
+```
+
+#### 05. Includes
+
+> `main.ter`
+```cpp
+include("./library.ter")
+output(value); // 18
+```
+
+> `library.ter`
+```cpp
+auto value = 18;
+```
+
+#### 06. Functions
+```cpp
+set print(str){
+  output(str);
+}
+
+set add(x, y){
+  return x + y;
+}
+
+set increment(a){
+  return ++a;
+}
+
+print("My content"); // My content
+output(add(3, 9)); // 12
+
+auto result = increment(6);
+output(result); // 7
+```
+
+#### 07. Classes
+```cpp
+class Animal {
+  cat(name){
+    output("Cat name is: " + name);
+  }
+
+  dog(){
+    output("I am dog!");
+  }
+
+  descAnimal(human){
+    return "Human: " + human;
+  }
+}
+
+Animal().cat("Bob");
+
+auto obj = Animal();
+obj.dog();
+
+output(obj.descAnimal("Peter"));
+```
+> Output:
+```bash
+Cat name is: Bob
+I am dog!
+Human: Peter
+```
+
+#### 08. Builtin Functions
+```cpp
+// Rand number
+auto num = rand(5, 15);
+output(num) // Number between 5 and 15
+
+// Clock
+auto myclock = clock();
+output(myclock); // Ex.: 1732022610.561000
+
+// Environment variables
+auto home = getenv("HOME");
+output(home); // Ex.: /home/user
+
+auto shell = getenv("SHELL")
+output(shell); // Ex.: /bin/bash
+
+// Temporary version
+auto version = args();
+output(version); // Ex.: Ter/Terlang VERSION: 0.0.1
+```
+
+
 
 ---
 
