@@ -238,7 +238,7 @@ output(version); // Ex.: Ter/Terlang VERSION: 0.0.1
 ---
 
 ## Tutorials
-From [video](COMMING SOON).
+From [video]([COMMING SOON](https://youtu.be/0sKCWJawDZ8)).
 
 ---
 
