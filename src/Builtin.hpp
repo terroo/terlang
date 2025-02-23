@@ -37,3 +37,10 @@ class Args : public Callable {
     std::any call(Interpreter &interpreter, std::vector<std::any> arguments) override;
     std::string toString() override;
 };
+
+class Exec : public Callable {
+  public:
+    int arity() override;
+    std::any call(Interpreter &interpreter, std::vector<std::any> arguments) override;
+    std::string toString() override;
+};

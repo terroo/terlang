@@ -7,6 +7,7 @@ Interpreter::Interpreter() {
   global->define("getenv", std::shared_ptr<GetEnv>{});
   global->define("to_string", std::shared_ptr<ToString>{});
   global->define("args", std::shared_ptr<Args>{});
+  global->define("exec", std::shared_ptr<Exec>{});
 }
 
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
@@ -353,6 +354,9 @@ std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
     return builtin->call(*this, arguments);
   }else if(callee.type() == typeid(std::shared_ptr<Args>)){ // Builtin
     auto builtin = std::make_shared<Args>();
+    return builtin->call(*this, arguments);
+  }else if(callee.type() == typeid(std::shared_ptr<Exec>)){ // Builtin
+    auto builtin = std::make_shared<Exec>();
     return builtin->call(*this, arguments);
   }else if(callee.type() == typeid(std::shared_ptr<Class>)){
     auto klass = std::any_cast<std::shared_ptr<Class>>(callee);

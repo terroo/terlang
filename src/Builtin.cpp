@@ -121,3 +121,29 @@ std::any Args::call(Interpreter &interpreter, std::vector<std::any> arguments){
 std::string Args::toString(){
   return "<function builtin>";
 }
+
+// ------ Exec -----------
+int Exec::arity(){
+  return 1;
+}
+
+std::any Exec::call(Interpreter &interpreter, std::vector<std::any> arguments){
+  if(arguments.size() > (size_t)arity() && interpreter.global != nullptr){
+    builtinError("exec");
+  }
+
+  std::string name = std::any_cast<std::string>(arguments[0]);
+  int run = std::system(name.data());
+  
+  if(run != 0){
+    builtinError("exec[system]");
+  }
+
+  std::string str_run = {};
+
+  return std::any_cast<std::string>(str_run);
+}
+
+std::string Exec::toString(){
+  return "<function builtin>";
+}
