@@ -1,13 +1,17 @@
 #include "Interpreter.hpp"
 #include "Environment.hpp"
+#include "BuiltinFactory.hpp"
 
-Interpreter::Interpreter() {
-  global->define("clock", std::shared_ptr<Clock>{});
-  global->define("rand", std::shared_ptr<Rand>{});
-  global->define("getenv", std::shared_ptr<GetEnv>{});
-  global->define("to_string", std::shared_ptr<ToString>{});
-  global->define("args", std::shared_ptr<Args>{});
-  global->define("exec", std::shared_ptr<Exec>{});
+Interpreter::Interpreter(){
+  for(const auto& [name, type] : builtinNames){
+    auto it = builtinFactory.find(type);
+    if(it != builtinFactory.end()){
+      global->define(name, it->second()); // Instantiate dynamically
+      //std::cout << "Registered builtin: " << name << std::endl; // Debug
+    }/*else{
+      std::cout << "ERROR: Builtin type not found for: " << name << std::endl;
+    }*/
+  }
 }
 
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
@@ -89,7 +93,7 @@ bool Interpreter::isEqual(const std::any& a, const std::any& b){
 
 std::string Interpreter::stringify(const std::any& object){
   if(object.type() == typeid(nullptr)) return "nil";
-  
+
   if(object.type() == typeid(double)){
     std::string text = std::to_string(std::any_cast<double>(object));
     if(text[text.length() - 7] == '.' && text[text.length() - 6] == '0'){
@@ -101,7 +105,7 @@ std::string Interpreter::stringify(const std::any& object){
   if (object.type() == typeid(std::string)) {
     std::string result = std::any_cast<std::string>(object);
 
-    // Substituir as sequências "\n" e "\r" por novas linhas e retornos de carro reais
+    // Replace the "\n" and "\r" sequences with real newlines and carriage returns
     size_t pos;
     while ((pos = result.find("\\n")) != std::string::npos) {
       result.replace(pos, 2, "\n");
@@ -114,13 +118,13 @@ std::string Interpreter::stringify(const std::any& object){
   }
 
   if(object.type() == typeid(bool)){
-     if(std::any_cast<bool>(object)){
-       std::string result{"true"};
-       return result;
-     }else{
-       std::string result{"false"};
-       return result;
-     }
+    if(std::any_cast<bool>(object)){
+      std::string result{"true"};
+      return result;
+    }else{
+      std::string result{"false"};
+      return result;
+    }
   }
 
   if(object.type() == typeid(std::shared_ptr<Function>)){
@@ -200,7 +204,7 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
       if(left.type() == typeid(std::string) && right.type() == typeid(std::string)){
         return std::any_cast<std::string>(left) + std::any_cast<std::string>(right);
       }
-      
+
       throw RuntimeError{expr->oper, "Operands not a same type"};
 
     case TokenType::STAR:
@@ -283,7 +287,7 @@ std::any Interpreter::visitAssignExpr(std::shared_ptr<Assign> expr){
 void Interpreter::executeBlock(
     const std::vector<std::shared_ptr<Statement::Stmt>> &statements, 
     std::shared_ptr<Env> new_env){
-    
+
   std::shared_ptr<Env> previous = curr_env;
   try{
     curr_env = new_env;
@@ -333,46 +337,30 @@ std::any Interpreter::visitWhileStmt(std::shared_ptr<Statement::While> stmt){
 std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
   std::any callee = evaluate(expr->callee);
   std::vector<std::any> arguments;
+
   for(std::shared_ptr<Expr> &argument : expr->arguments){
     arguments.push_back(evaluate(argument));
   }
 
-  std::shared_ptr<Callable> function;
+  // Check if it is a generic Callable
+  if(callee.type() == typeid(std::shared_ptr<Callable>)){
+    auto function = std::any_cast<std::shared_ptr<Callable>>(callee);
+    return function->call(*this, arguments);
+  }
+
+  // Checks if it is a user-defined function
   if(callee.type() == typeid(std::shared_ptr<Function>)){
-    function = std::any_cast<std::shared_ptr<Function>>(callee);
-  }else if(callee.type() == typeid(std::shared_ptr<Clock>)){ // Builtin
-    auto builtin = std::make_shared<Clock>();
-    return builtin->call(*this, arguments);
-  }else if(callee.type() == typeid(std::shared_ptr<Rand>)){ // Builtin
-    auto builtin = std::make_shared<Rand>();
-    return builtin->call(*this, arguments);
-  }else if(callee.type() == typeid(std::shared_ptr<GetEnv>)){ // Builtin
-    auto builtin = std::make_shared<GetEnv>();
-    return builtin->call(*this, arguments);
-  }else if(callee.type() == typeid(std::shared_ptr<ToString>)){ // Builtin
-    auto builtin = std::make_shared<ToString>();
-    return builtin->call(*this, arguments);
-  }else if(callee.type() == typeid(std::shared_ptr<Args>)){ // Builtin
-    auto builtin = std::make_shared<Args>();
-    return builtin->call(*this, arguments);
-  }else if(callee.type() == typeid(std::shared_ptr<Exec>)){ // Builtin
-    auto builtin = std::make_shared<Exec>();
-    return builtin->call(*this, arguments);
-  }else if(callee.type() == typeid(std::shared_ptr<Class>)){
+    auto function = std::any_cast<std::shared_ptr<Function>>(callee);
+    return function->call(*this, arguments);
+  }
+
+  // Checks if it is a class (to instantiate objects)
+  if(callee.type() == typeid(std::shared_ptr<Class>)){
     auto klass = std::any_cast<std::shared_ptr<Class>>(callee);
-    auto instance = std::make_shared<Instance>(klass);
-    return instance;
-  }else{
-    throw RuntimeError{expr->paren, "Can only call functions and classes."};
+    return std::make_shared<Instance>(klass);
   }
 
-  if(static_cast<int>(arguments.size()) != function->arity()){
-    throw RuntimeError{expr->paren, 
-      "Expected " + std::to_string(function->arity()) + " arguments but got " + std::to_string(arguments.size()) + " ."
-    };
-  }
-
-  return function->call(*this, std::move(arguments));
+  throw RuntimeError{expr->paren, "Can only call functions and classes."};
 }
 
 
