@@ -114,7 +114,7 @@ std::any Args::call(Interpreter &interpreter, std::vector<std::any> arguments){
     builtinError("args");
   }
 
-  std::string version = "Ter/Terlang VERSION: 0.0.1";
+  std::string version = "Ter/Terlang VERSION: 0.0.4";
   return std::any_cast<std::string>(version);
 }
 
