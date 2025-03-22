@@ -250,9 +250,9 @@ From [video](https://youtu.be/0sKCWJawDZ8).
 ---
 
 ## Extensions and LICENSE
-Syntax highlight for Vim:
+[Syntax highlight for Vim](https://github.com/terroo/ter-vim)
 
-Syntax highlight for Neovim:
+[Syntax highlight for Neovim](https://github.com/terroo/ter-vim)
 
 Syntax highlight for VS Code:
 > Comming soon!
