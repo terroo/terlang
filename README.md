@@ -246,7 +246,8 @@ output(version); // Ex.: Ter/Terlang VERSION: 0.0.1
 ```bash
 ter -e 'output("Hello, Word!")'
 ter -e 'auto x = 9 output(x)'
-ter -e 'auto var = 42;out(var + "\n")'
+ter -e 'auto var = 42;out(to_string(var) + "\n")'
+ter -e "$(cat build.ter)"
 ```
 
 ---
@@ -261,7 +262,10 @@ emmake make
 
 Testing:
 ```bash
-node ./ter.js -e 'output("Hello, Word!")'
+cd web/
+node ter.js -e 'output("Hello, Word!")'
+node ter.js -e 'auto var = 42;out(to_string(var) + "\n")'
+node ter.js -e "$(cat build.ter)"
 ```
 
 ---
