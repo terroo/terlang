@@ -16,5 +16,6 @@ class Ter {
 
   public:
     static void run_file(const std::string&);
+    static void run_script(const std::string&);
     static void repl();
 };

@@ -5,7 +5,20 @@ void help(const std::string& prog){
 }
 
 int main(int argc, char **argv){
+
   if(argc > 2){
+
+    const std::string e = argv[1];
+
+    if(e == "-e"){
+      if (argc > 3 || argv[2] == nullptr || std::string(argv[2]).empty()) {
+        std::cerr << "Error: Missing script argument after -e\n";
+        return EXIT_FAILURE;
+      }
+      Ter::run_script(argv[2]);
+      return EXIT_SUCCESS;
+    }
+
     help(argv[0]);
     return EXIT_FAILURE;
   }

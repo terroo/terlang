@@ -48,6 +48,12 @@ void Ter::repl(){
   }
 }
 
+void Ter::run_script(const std::string& script){
+  run(script);
+  if(Debug::hadError){ std::exit(65); }
+  if(Debug::hadRuntimeError){ std::exit(70); }
+}
+
 void Ter::run(const std::string& source){
   Scanner scanner(source);
   std::vector<Token> tokens = scanner.scanTokens();
