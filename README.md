@@ -279,8 +279,10 @@ From [video](https://youtu.be/0sKCWJawDZ8).
 
 [Syntax highlight for Neovim](https://github.com/terroo/ter-vim)
 
-Syntax highlight for VS Code:
-> Comming soon!
+[Syntax highlight for VS Code](https://marketplace.visualstudio.com/items?itemName=SaymonMacedo.terlang)
+> Created by Saymon Macedo.
+> 
+> [My alternative version](https://marketplace.visualstudio.com/items?itemName=marcoscode.ter)
 
 ---
 
