@@ -240,7 +240,29 @@ auto version = args();
 output(version); // Ex.: Ter/Terlang VERSION: 0.0.1
 ```
 
+---
 
+## Run from command line
+```bash
+ter -e 'output("Hello, Word!")'
+ter -e 'auto x = 9 output(x)'
+ter -e 'auto var = 42;out(var + "\n")'
+```
+
+---
+
+#### Using [Emscripten](https://emscripten.org/)
+Compiling:
+```bash
+emmake -B web .
+cd web
+emmake make
+```
+
+Testing:
+```bash
+node ./ter.js -e 'output("Hello, Word!")'
+```
 
 ---
 

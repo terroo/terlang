@@ -1,7 +1,9 @@
 #include "Ter.hpp"
 
 void help(const std::string& prog){
-  std::cerr << "Usage: " << prog << " [filename].ter\n";
+  std::cerr << "Usage: \n\t" <<
+    prog << " [filename].ter\n\t" << 
+    prog << " -e '<script>'\n";
 }
 
 int main(int argc, char **argv){
@@ -26,6 +28,12 @@ int main(int argc, char **argv){
   if(argc == 2){
     const std::string filename = argv[1];
     const std::string hext = "\x2e\x74\x65\x72";
+
+    if(filename.length() < 4){
+      help(argv[0]);
+      return EXIT_FAILURE;
+    }
+
     if(filename.substr( filename.length() - 4, 4 ) != hext){
       help(argv[0]);
       return EXIT_FAILURE;
