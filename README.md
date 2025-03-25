@@ -255,7 +255,7 @@ ter -e "$(cat build.ter)"
 #### Using [Emscripten](https://emscripten.org/)
 Compiling:
 ```bash
-emmake -B web .
+emmake cmake -B web .
 cd web
 emmake make
 ```
