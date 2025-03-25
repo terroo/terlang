@@ -262,7 +262,6 @@ emmake make
 
 Testing:
 ```bash
-cd web/
 node ter.js -e 'output("Hello, Word!")'
 node ter.js -e 'auto var = 42;out(to_string(var) + "\n")'
 node ter.js -e "$(cat build.ter)"
