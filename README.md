@@ -263,6 +263,17 @@ ter params.ter first second --third "My Four"
 [first, second, --third, My Four]
 ```
 
+Example 02, **WITH ESPECIFIC** param:
+> `params.ter`
+```cpp
+auto params = args()
+output(params[0])
+```
+```bash
+ter params.ter file.txt
+file.txt
+```
+
 ---
 
 ## 10. Run from command line
