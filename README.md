@@ -236,10 +236,6 @@ exec("ls")
 // Compiling C++ code
 exec("g++ main.cpp")
 exec("./a.out")
-
-// Temporary version
-auto version = args();
-output(version); // Ex.: Ter/Terlang VERSION: 0.0.1
 ```
 
 ---
