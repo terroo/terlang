@@ -65,7 +65,7 @@ Close PowerShell, then reopen and run:
 > To test the `ter` command.
 ```cpp
 ter --version
-Ter/Terlang v0.0.9
+Ter/Terlang v0.1.1
 
 Usage: 
 	ter [filename].ter
@@ -95,7 +95,7 @@ sudo mv ter /usr/local/bin
 And test:
 ```cpp
 ter --version
-Ter/Terlang v0.0.9
+Ter/Terlang v0.1.1
 
 Usage: 
 	ter [filename].ter
