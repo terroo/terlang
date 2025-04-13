@@ -36,9 +36,7 @@ REPL:
 > To test the `ter` command.
 ```cpp
 $ ter
-ter> output(args())
-Ter/Terlang VERSION: 0.0.1
-ter> exit
+ter> output("Hello Ter!")
 ```
 
 ---
@@ -66,10 +64,12 @@ Move-Item -Path "build\Debug\ter.exe" -Destination "C:\Program Files\Terlang\bin
 Close PowerShell, then reopen and run:
 > To test the `ter` command.
 ```cpp
-prompt> ter
-ter> output(args())
-Ter/Terlang VERSION: 0.0.1
-ter> exit
+ter --version
+Ter/Terlang v0.0.9
+
+Usage: 
+	ter [filename].ter
+	ter -e '<script>'
 ```
 
 ---
@@ -94,10 +94,12 @@ sudo mv ter /usr/local/bin
 
 And test:
 ```cpp
-$ ter
-ter> output(args())
-Ter/Terlang VERSION: 0.0.1
-ter> exit
+ter --version
+Ter/Terlang v0.0.9
+
+Usage: 
+	ter [filename].ter
+	ter -e '<script>'
 ```
 
 ---
@@ -242,7 +244,28 @@ output(version); // Ex.: Ter/Terlang VERSION: 0.0.1
 
 ---
 
-## Run from command line
+## 09. Command line arguments
+> `params.ter`
+```cpp
+auto params = args()
+output(params)
+```
+
+Example 01, **withOUT** params:
+```bash
+ter params.ter 
+[]
+```
+
+Example 02, **WITH** params:
+```bash
+ter params.ter first second --third "My Four"
+[first, second, --third, My Four]
+```
+
+---
+
+## 10. Run from command line
 ```bash
 ter -e 'output("Hello, Word!")'
 ter -e 'auto x = 9 output(x)'
@@ -252,7 +275,7 @@ ter -e "$(cat build.ter)"
 
 ---
 
-#### Using [Emscripten](https://emscripten.org/)
+## 11. Using [Emscripten](https://emscripten.org/)
 Compiling:
 ```bash
 emmake cmake -B web .
@@ -271,6 +294,12 @@ node ter.js -e "$(cat build.ter)"
 
 ## Tutorials
 From [video](https://youtu.be/0sKCWJawDZ8).
+
+Helper:
+```bash
+ter --help
+```
+> Stay tuned for the version: `ter --version`
 
 ---
 
