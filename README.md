@@ -322,4 +322,24 @@ ter --help
 
 ---
 
+## [Speed test](https://terminalroot.com.br/2023/01/testei-o-desempenho-de-10-linguagens-de-programacao-ranking-final.html)
+> Based on [these tests](https://github.com/terroo/langs-test-loop) that were done.
+
+> `speed.ter`
+```cpp
+for(auto i = 0; i < 1000000; ++i){
+  out("Ok" + to_string(i) + "\r")
+}
+```
+
+Run `time ter speed.ter` and result:
+```bash
+Ok999999
+real	0m2,632s
+user	0m2,500s
+sys	0m0,110s
+```
+
+---
+
 [LICENSE GNU GPLv3](./LICENSE)
