@@ -1,6 +1,8 @@
 #include "Ter.hpp"
+#include "Helpers.hpp"
 
 void help(const std::string& prog){
+  std::cerr << "Ter/Terlang v0.0.9\n\n";
   std::cerr << "Usage: \n\t" <<
     prog << " [filename].ter\n\t" << 
     prog << " -e '<script>'\n";
@@ -8,12 +10,18 @@ void help(const std::string& prog){
 
 int main(int argc, char **argv){
 
-  if(argc > 2){
+  if(argc >= 2){
+    std::vector<std::string> args;
+    for(int i = 0; i < argc; ++i){
+      args.emplace_back(argv[i]);
+    }
 
-    const std::string e = argv[1];
+    Helpers::get_instance().set_args(argc, args);
 
-    if(e == "-e"){
-      if (argc > 3 || argv[2] == nullptr || std::string(argv[2]).empty()) {
+    const std::string arg1 = argv[1];
+
+    if(arg1 == "-e"){
+      if(argc != 3 || std::string(argv[2]).empty()) {
         std::cerr << "Error: Missing script argument after -e\n";
         return EXIT_FAILURE;
       }
@@ -21,28 +29,19 @@ int main(int argc, char **argv){
       return EXIT_SUCCESS;
     }
 
+    const std::string filename = argv[1];
+    const std::string hext = "\x2e\x74\x65\x72";
+
+    if(filename.length() >= 4 && filename.substr(filename.length() - 4) == hext){
+      Ter::run_file(argv[1]);
+      return EXIT_SUCCESS;
+    }
+
     help(argv[0]);
     return EXIT_FAILURE;
   }
 
-  if(argc == 2){
-    const std::string filename = argv[1];
-    const std::string hext = "\x2e\x74\x65\x72";
-
-    if(filename.length() < 4){
-      help(argv[0]);
-      return EXIT_FAILURE;
-    }
-
-    if(filename.substr( filename.length() - 4, 4 ) != hext){
-      help(argv[0]);
-      return EXIT_FAILURE;
-    }
-    Ter::run_file(argv[1]);
-  }else{
-    Ter::repl();
-  }
-
+  Ter::repl();
   return EXIT_SUCCESS;
 }
 

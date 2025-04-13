@@ -5,18 +5,18 @@ void ArrayType::append(std::any value) {
 }
 
 std::any ArrayType::getEleAt(int index) {
-  return values.at(index);
+  return values.at(static_cast<size_t>(index));
 }
 
 int ArrayType::length() {
-  return values.size();
+  return static_cast<int>(values.size());
 }
 
 bool ArrayType::setAtIndex(int index, std::any value) {
   if(index == length()){
     values.insert(values.begin() + index, value);
   }else if(index < length() && index >= 0) {
-    values[index] = value;
+    values[static_cast<size_t>(index)] = value;
   }else{
     return false;
   }

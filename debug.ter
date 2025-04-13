@@ -1,0 +1,8 @@
+auto compiler = "clang++ -stdlib=libc++"
+auto add_flags = "-O0 -fno-omit-frame-pointer -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wcast-align -Wconversion"
+auto sanitize = "-fsanitize=undefined -fsanitize=leak"
+auto flags = "-g -Wall -Werror -Wextra -Wshadow -Wpedantic -fsanitize=address"
+auto build = compiler + " " + add_flags + " " + sanitize + " " + " " + flags + " ./src/*.cpp"
+
+output(build)
+exec(build)

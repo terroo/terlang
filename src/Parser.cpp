@@ -4,7 +4,6 @@
 Parser::Parser(const std::vector<Token>& tokens) : tokens(tokens) {}
 
 std::vector<std::shared_ptr<Statement::Stmt>> Parser::parse(){
-  //std::vector<std::shared_ptr<Statement::Stmt>> statements;
   statements.clear();
   try {
     while(!isAtEnd()){
@@ -142,11 +141,11 @@ Token Parser::advance(){
 }
 
 Token Parser::peek(){
-  return tokens.at(current);
+  return tokens.at(static_cast<size_t>(current));
 }
 
 Token Parser::previous(){
-  return tokens.at(current - 1);
+  return tokens.at(static_cast<size_t>(current - 1));
 }
 
 Parser::ParseError Parser::error(const Token& token, const std::string& message){
@@ -251,12 +250,12 @@ std::shared_ptr<Expr> Parser::assignment(){
 }
 
 std::vector<std::shared_ptr<Statement::Stmt>> Parser::block(){
-  std::vector<std::shared_ptr<Statement::Stmt>> statements;
+  std::vector<std::shared_ptr<Statement::Stmt>> localStatements;
   while(!check(TokenType::RIGHT_BRACE) && !isAtEnd()){
-    statements.push_back(declaration());
+    localStatements.push_back(declaration());
   }
   consume(TokenType::RIGHT_BRACE, "Expected '}' after block.");
-  return statements;
+  return localStatements;
 }
 
 std::shared_ptr<Statement::Stmt> Parser::IfStatement(){

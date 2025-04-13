@@ -1,6 +1,7 @@
 #include "Builtin.hpp"
 #include <chrono>
 #include <random>
+#include "Helpers.hpp"
 
 void builtinError(const std::string& nameBuiltin){
     std::cerr << "Builtin '" << nameBuiltin << "' function error.\n";
@@ -49,7 +50,7 @@ std::any Rand::call(Interpreter &interpreter, std::vector<std::any> arguments){
   std::random_device rd;
   std::mt19937 gen(rd());
 
-  std::uniform_int_distribution<> dist(a, b);
+  std::uniform_int_distribution<> dist(static_cast<int>(a), static_cast<int>(b));
 
   double random_number = dist(gen);
 
@@ -94,7 +95,7 @@ std::any ToString::call(Interpreter &interpreter, std::vector<std::any> argument
     builtinError("to_string");
   }
 
-  int terint = std::any_cast<double>(arguments[0]);
+  int terint = static_cast<int>(std::any_cast<double>(arguments[0]));
   std::string str = std::to_string(std::any_cast<int>(terint));
 
   return std::any_cast<std::string>(str);
@@ -114,8 +115,16 @@ std::any Args::call(Interpreter &interpreter, std::vector<std::any> arguments){
     builtinError("args");
   }
 
-  std::string version = "Ter/Terlang VERSION: 0.0.9";
-  return std::any_cast<std::string>(version);
+  std::vector<std::string> args = Helpers::get_instance().get_args();
+  auto arr = std::make_shared<ArrayType>();
+
+  for(size_t i = 0; i < args.size(); ++i){
+    if(i != 0 && i != 1){
+      arr->append(args[i]);
+    }
+  }
+
+  return std::any(arr);
 }
 
 std::string Args::toString(){

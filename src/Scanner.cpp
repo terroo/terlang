@@ -20,13 +20,13 @@ void Scanner::addToken(TokenType type){
 }
 
 void Scanner::addToken(TokenType type, std::any literal){
-  std::string text{source.substr(start, current - start)};
+  std::string text{source.substr(static_cast<size_t>(start), static_cast<size_t>(current - start))};
   tokens.emplace_back(type, text, literal, line);
 }
 
 void Scanner::identifier(){
   while(isAlphaNumeric(peek())) advance();
-  std::string text{source.substr(start, current - start)};
+  std::string text{source.substr(static_cast<size_t>(start), static_cast<size_t>(current - start))};
   auto it = keywords.find(text);
   TokenType type = it == keywords.end() ? TokenType::IDENTIFIER : it->second;
   addToken(type);
@@ -40,7 +40,7 @@ void Scanner::number(){
     while(isDigit(peek())) advance();
   }
 
-  std::string text = source.substr(start, current - start);
+  std::string text{source.substr(static_cast<size_t>(start), static_cast<size_t>(current - start))};
   double number = std::stod(std::string{text});
   addToken(TokenType::NUMBER, number);
 }
@@ -58,24 +58,24 @@ void Scanner::string(){
 
   advance();
 
-  std::string value(source.substr(start + 1, current - start - 2));
+  std::string value{source.substr(static_cast<size_t>(start + 1), static_cast<size_t>(current - start - 2))};
   addToken(TokenType::STRING, value);
 }
 
 bool Scanner::match(char expected){
-  if(isAtEnd() || source.at(current) != expected) return false;
+  if (isAtEnd() || source.at(static_cast<size_t>(current)) != expected) return false;
   current++;
   return true;
 }
 
 char Scanner::peek(){
   if(isAtEnd()) return '\0';
-  return source.at(current);
+  return source.at(static_cast<size_t>(current));
 }
 
 char Scanner::peekNext(){
   if(current + 1 > static_cast<int>(source.length())) return '\0';
-  return source.at(current + 1);
+  return source.at(static_cast<size_t>(current + 1));
 }
 
 bool Scanner::isAlpha(char c){
@@ -93,7 +93,7 @@ bool Scanner::isDigit(char c){
 }
 
 char Scanner::advance(){
-  return source[current++];
+  return source[static_cast<size_t>(current++)];
 }
 
 void Scanner::scanToken(){

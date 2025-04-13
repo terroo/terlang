@@ -14,7 +14,7 @@ class Class : public Callable{
     Class(const std::string& name, std::unordered_map<std::string, std::shared_ptr<Function>> methods);
     std::string name;
     std::unordered_map<std::string, std::shared_ptr<Function>> methods;
-    std::optional<std::shared_ptr<Function>> findMethod(const std::string& name);
+    std::optional<std::shared_ptr<Function>> findMethod(const std::string& l_name);
 
     int arity() override;
     std::any call(Interpreter &interpreter, std::vector<std::any> arguments) override;

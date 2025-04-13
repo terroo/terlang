@@ -21,8 +21,8 @@ int Class::arity(){
   return 0;
 }
 
-std::optional<std::shared_ptr<Function>> Class::findMethod(const std::string& name) {
-  auto it = methods.find(name);
+std::optional<std::shared_ptr<Function>> Class::findMethod(const std::string& l_name) {
+  auto it = methods.find(l_name);
   if(it != methods.end()){
     return it->second;
   }

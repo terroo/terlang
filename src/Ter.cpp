@@ -21,7 +21,7 @@ void Ter::run_file(const std::string& path){
 
   std::streamsize size = file.tellg();
   file.seekg(0, std::ios::beg);
-  std::vector<char> buffer(size);
+  std::vector<char> buffer(static_cast<size_t>(size));
 
   if(!file.read(buffer.data(), size)){
     std::cerr << "Error reading file.\n";

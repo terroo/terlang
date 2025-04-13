@@ -37,12 +37,11 @@ void Resolver::define(Token& name){
   scopes.back()[name.lexeme] = true;
 }
 
-
 void Resolver::resolveLocal(std::shared_ptr<Expr> expr, Token& name){
-  int scopeSize = scopes.size() - 1;
+  int scopeSize = static_cast<int>(scopes.size()) - 1;
   for(int i = scopeSize; i >= 0; i--){
-    if(scopes[i].find(name.lexeme) != scopes[i].end()){
-      identifiers[i].erase(name);
+    if(scopes[static_cast<size_t>(i)].find(name.lexeme) != scopes[static_cast<size_t>(i)].end()) {
+      identifiers[static_cast<size_t>(i)].erase(name);
       interpreter.resolve(expr, scopeSize - i);
       return;
     }

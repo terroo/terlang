@@ -6,14 +6,14 @@ Function::Function(std::shared_ptr<Statement::Function> declaration,
     closure{std::move(closure)} {}
 
 int Function::arity(){
-  return declaration->params.size();
+  return static_cast<int>(declaration->params.size());
 }
 
 std::any Function::call(Interpreter &interpreter, std::vector<std::any> arguments){
   auto newEnv = std::make_shared<Env>(closure.lock());
   int size = static_cast<int>(declaration->params.size());
   for(int i = 0; i < size; i++){
-    newEnv->define(declaration->params[i].lexeme, arguments[i]);
+    newEnv->define(declaration->params[static_cast<size_t>(i)].lexeme, arguments[static_cast<size_t>(i)]);
   }
 
   try {

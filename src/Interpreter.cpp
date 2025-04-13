@@ -6,11 +6,8 @@ Interpreter::Interpreter(){
   for(const auto& [name, type] : builtinNames){
     auto it = builtinFactory.find(type);
     if(it != builtinFactory.end()){
-      global->define(name, it->second()); // Instantiate dynamically
-      //std::cout << "Registered builtin: " << name << std::endl; // Debug
-    }/*else{
-      std::cout << "ERROR: Builtin type not found for: " << name << std::endl;
-    }*/
+      global->define(name, it->second());
+    }
   }
 }
 
@@ -456,7 +453,7 @@ std::any Interpreter::visitCallistExpr(std::shared_ptr<Callist> expr){
       castedIndex = std::any_cast<double>(index);
       if(expr->value != nullptr){
         std::any value = evaluate(expr->value);
-        if(list->setAtIndex(castedIndex, value)){
+        if(list->setAtIndex(static_cast<int>(castedIndex), value)) {
           return value; 
         }else{
           throw RuntimeError{expr->paren, "Index out of range."};
@@ -465,7 +462,7 @@ std::any Interpreter::visitCallistExpr(std::shared_ptr<Callist> expr){
         if(castedIndex >= list->length() || castedIndex < 0){
           return nullptr;
         }
-        return list->getEleAt(castedIndex);
+        return list->getEleAt(static_cast<int>(castedIndex));
       }
     }else{
       throw RuntimeError{expr->paren, "Index should be of type int."};
