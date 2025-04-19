@@ -1,0 +1,10 @@
+auto a=9007199254740990
+for(auto i = 0; i < 3; ++i){
+  a=a+1
+  output(a)
+}
+a=-9007199254740990
+for(auto i = 0; i < 3; ++i){
+  a=a-1
+  output(a)
+}

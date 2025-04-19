@@ -1,0 +1,12 @@
+for(auto i = 0; i < 5; ++i){ // Or i++
+  out(to_string(i) + " | ")
+}
+out("\n") // 0 | 1 | 2 | 3 | 4 |
+
+
+auto i = 0;
+while(i < 5){
+  out(to_string(i) + " | ")
+  ++i;
+}
+out("\n") // 0 | 1 | 2 | 3 | 4 |

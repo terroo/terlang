@@ -1,0 +1,19 @@
+set print(str){
+  output(str);
+}
+
+set add(x, y){
+  return x + y;
+}
+
+set increment(a){
+  return ++a;
+}
+
+print("My content"); // My content
+output(add(3, 9)); // 12
+
+auto result = increment(6);
+output(result); // 7
+
+output(increment(add(3,9))) //13
