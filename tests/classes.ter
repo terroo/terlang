@@ -1,0 +1,20 @@
+class Animal {
+  cat(name){
+    output("Cat name is: " + name);
+  }
+
+  dog(){
+    output("I am dog!");
+  }
+
+  descAnimal(human){
+    return "Human: " + human;
+  }
+}
+
+Animal().cat("Bob");
+
+auto obj = Animal();
+obj.dog();
+
+output(obj.descAnimal("Peter"));

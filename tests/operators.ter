@@ -1,0 +1,15 @@
+auto a=2;
+auto b=3;
+
+output(a+b);
+output(a-b);
+output(a*b);
+output(a/b);
+/* TODO 
+output(a%b);
+output(a&b);
+output(a|b);
+output(a^b);
+output(a<<b);
+output(a>>b);
+*/

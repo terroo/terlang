@@ -1,0 +1,3 @@
+auto params = args()
+output(params)
+output(params[1])

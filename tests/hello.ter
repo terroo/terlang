@@ -1,0 +1,2 @@
+auto a="Hello Ter!"
+output(a)
