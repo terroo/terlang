@@ -71,7 +71,7 @@ std::shared_ptr<Expr> Parser::factor(){
 
 std::shared_ptr<Expr> Parser::unary(){
   while(match(TokenType::BANG, TokenType::MINUS,
-        TokenType::PLUS_PLUS, TokenType::MINUS_MINUS)){
+        TokenType::PLUS_PLUS, TokenType::MINUS_MINUS, TokenType::TILDE)){
     Token oper = previous(); // ++
     std::shared_ptr<Expr> right = unary(); // var name
 

@@ -18,6 +18,7 @@ std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
 }
 
 std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
+  int64_t i_right;
   std::any right = evaluate(expr->right);
 
   switch(expr->oper.type){
@@ -43,6 +44,9 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
     case TokenType::MINUS:
       checkNumberOperand(expr->oper, right);
       return -std::any_cast<double>(right);
+    case TokenType::TILDE:
+      i_right = doubleToInt(expr->oper,right);
+      return static_cast<double>(~i_right);
     default:
       return {};
   }
