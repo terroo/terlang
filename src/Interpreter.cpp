@@ -66,6 +66,21 @@ void Interpreter::checkNumberOperands(const Token& oper, const std::any& left, c
   throw RuntimeError{oper, "Operand must be a number."};
 }
 
+int64_t Interpreter::doubleToInt(const Token& oper, const std::any& value) {
+  double integerPart;
+  if(value.type() != typeid(double)) {
+    throw RuntimeError{oper, "Operand must be a number."};
+  }
+  if (modf(std::any_cast<double>(value), &integerPart) != 0.0) {
+    throw RuntimeError{oper, "Operand must be an integer."};
+  }
+  if (integerPart < static_cast<double>(std::numeric_limits<int64_t>::min()) ||
+      integerPart > static_cast<double>(std::numeric_limits<int64_t>::max())) {
+    throw RuntimeError{oper, "Value out of int64_t range"};
+  }
+  return static_cast<int64_t>(integerPart);
+}
+
 bool Interpreter::isEqual(const std::any& a, const std::any& b){
   if(a.type() == typeid(nullptr) && b.type() == typeid(nullptr)){
     return true;
@@ -177,6 +192,7 @@ std::any Interpreter::evaluate(std::shared_ptr<Expr> expr){
 std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
   std::any left = evaluate(expr->left);
   std::any right = evaluate(expr->right);
+  int64_t i_left, i_right;
 
   switch (expr->oper.type) {
     case TokenType::GREATER:
@@ -209,6 +225,10 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
     case TokenType::PERCENT:
       checkNumberOperands(expr->oper, left, right);
       return fmod(std::any_cast<double>(left), std::any_cast<double>(right));
+    case TokenType::AMPERSAND:
+      i_left = doubleToInt(expr->oper,left);
+      i_right = doubleToInt(expr->oper,right);
+      return static_cast<double>(i_left & i_right);
     case TokenType::STAR:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) * std::any_cast<double>(right);

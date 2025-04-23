@@ -19,6 +19,16 @@ std::shared_ptr<Expr> Parser::expression(){
   return assignment();
 }
 
+std::shared_ptr<Expr> Parser::bitwise(){
+  std::shared_ptr<Expr> expr = equality();
+  while(match(TokenType::AMPERSAND)){
+    Token oper = previous();
+    std::shared_ptr<Expr> right = equality();
+    expr = std::make_shared<Binary>(expr, oper, right);
+  }
+  return expr;
+}
+
 std::shared_ptr<Expr> Parser::equality(){
   std::shared_ptr<Expr> expr = comparison();
   while(match(TokenType::BANG_EQUAL, TokenType::EQUAL_EQUAL)){
@@ -282,10 +292,10 @@ std::shared_ptr<Expr> Parser::logicalOr(){
 }
 
 std::shared_ptr<Expr> Parser::logicalAnd(){
-  std::shared_ptr<Expr> expr = equality();
+  std::shared_ptr<Expr> expr = bitwise();
   while(match(TokenType::AND)){
     Token oper = previous();
-    std::shared_ptr<Expr> right = equality();
+    std::shared_ptr<Expr> right = bitwise();
     expr = std::make_shared<Logical>(expr, std::move(oper), right);
   }
   return expr;

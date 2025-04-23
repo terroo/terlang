@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 class Env;
 
 #include "Token.hpp"
@@ -55,6 +57,7 @@ class Interpreter : public ExprVisitor, public Statement::StmtVisitor {
   private:
     void checkNumberOperand(const Token& oper, const std::any& operand);
     void checkNumberOperands(const Token& oper, const std::any& left, const std::any& right);
+    int64_t doubleToInt(const Token& oper, const std::any& value);
     bool isTruthy(const std::any& object);
     bool isEqual(const std::any& a, const std::any& b);
     std::string stringify(const std::any& object);
