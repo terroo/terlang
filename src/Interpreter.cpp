@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Interpreter.hpp"
 #include "Environment.hpp"
 #include "BuiltinFactory.hpp"
@@ -204,6 +206,9 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
 
       throw RuntimeError{expr->oper, "Operands not a same type"};
 
+    case TokenType::PERCENT:
+      checkNumberOperands(expr->oper, left, right);
+      return fmod(std::any_cast<double>(left), std::any_cast<double>(right));
     case TokenType::STAR:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) * std::any_cast<double>(right);
