@@ -229,6 +229,14 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
       i_left = doubleToInt(expr->oper,left);
       i_right = doubleToInt(expr->oper,right);
       return static_cast<double>(i_left & i_right);
+    case TokenType::CARET:
+      i_left = doubleToInt(expr->oper,left);
+      i_right = doubleToInt(expr->oper,right);
+      return static_cast<double>(i_left ^ i_right);
+    case TokenType::VBAR:
+      i_left = doubleToInt(expr->oper,left);
+      i_right = doubleToInt(expr->oper,right);
+      return static_cast<double>(i_left | i_right);
     case TokenType::STAR:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) * std::any_cast<double>(right);

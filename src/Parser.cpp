@@ -21,7 +21,7 @@ std::shared_ptr<Expr> Parser::expression(){
 
 std::shared_ptr<Expr> Parser::bitwise(){
   std::shared_ptr<Expr> expr = equality();
-  while(match(TokenType::AMPERSAND)){
+  while(match(TokenType::AMPERSAND, TokenType::CARET, TokenType::VBAR)){
     Token oper = previous();
     std::shared_ptr<Expr> right = equality();
     expr = std::make_shared<Binary>(expr, oper, right);
