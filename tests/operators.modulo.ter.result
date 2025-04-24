@@ -1,0 +1,8 @@
+   Regular
+1|1|-1|-1|0
+   Limit 53 bits
+1|-0|9007199254740990|1
+   Floating point
+1.500000|-1.200000|0.100000
+   Zero
+-nan|-nan|-nan

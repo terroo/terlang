@@ -1,0 +1,10 @@
+auto a=0; auto b=0
+out(a&b) out("|") out(a|b) out("|") out(a^b) out("|") output(~a)
+a=-1
+out(a&b) out("|") out(a|b) out("|") out(a^b) out("|") output(~a)
+a=9007199254740991
+b=-9007199254740991
+out(a&b) out("|") out(a|b) out("|") out(a^b) out("|") output(~a)
+a= 6004799503160661  //  0x15555555555555
+b= -3002399751580330 // -0xaaaaaaaaaaaaa
+out(a&b) out("|") out(a|b) out("|") out(a^b) out("|") output(~a)
