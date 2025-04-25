@@ -34,8 +34,9 @@ struct Literal final: Expr, public std::enable_shared_from_this<Literal> {
 struct Unary final: Expr, public std::enable_shared_from_this<Unary> {
   Token oper;
   std::shared_ptr<Expr> right;
+  bool isPostOperator;
 
-  Unary(Token oper, std::shared_ptr<Expr> right);
+  Unary(Token oper, std::shared_ptr<Expr> right, bool isPostOperator);
   std::any accept(ExprVisitor &visitor) override;
   ~Unary() = default;
 };

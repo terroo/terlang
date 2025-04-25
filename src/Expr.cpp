@@ -21,8 +21,8 @@ std::any Literal::accept(ExprVisitor &visitor){
   return visitor.visitLiteralExpr(shared_from_this());
 }
 
-Unary::Unary(Token oper, std::shared_ptr<Expr> right) : 
-  oper{std::move(oper)}, right{std::move(right)} {}
+Unary::Unary(Token oper, std::shared_ptr<Expr> right, bool isPost) : 
+  oper{std::move(oper)}, right{std::move(right)}, isPostOperator{isPost} {}
 
 std::any Unary::accept(ExprVisitor &visitor){
   return visitor.visitUnaryExpr(shared_from_this());
