@@ -19,6 +19,16 @@ std::shared_ptr<Expr> Parser::expression(){
   return assignment();
 }
 
+std::shared_ptr<Expr> Parser::bitwise(){
+  std::shared_ptr<Expr> expr = equality();
+  while(match(TokenType::AMPERSAND, TokenType::CARET, TokenType::VBAR)){
+    Token oper = previous();
+    std::shared_ptr<Expr> right = equality();
+    expr = std::make_shared<Binary>(expr, oper, right);
+  }
+  return expr;
+}
+
 std::shared_ptr<Expr> Parser::equality(){
   std::shared_ptr<Expr> expr = comparison();
   while(match(TokenType::BANG_EQUAL, TokenType::EQUAL_EQUAL)){
@@ -51,7 +61,7 @@ std::shared_ptr<Expr> Parser::term(){
 
 std::shared_ptr<Expr> Parser::factor(){
   std::shared_ptr<Expr> expr = unary();
-  while(match(TokenType::SLASH, TokenType::STAR)){
+  while(match(TokenType::SLASH, TokenType::STAR, TokenType::PERCENT)){
     Token oper = previous();
     std::shared_ptr<Expr> right = unary();
     expr = std::make_shared<Binary>(expr, oper, right);
@@ -61,7 +71,7 @@ std::shared_ptr<Expr> Parser::factor(){
 
 std::shared_ptr<Expr> Parser::unary(){
   while(match(TokenType::BANG, TokenType::MINUS,
-        TokenType::PLUS_PLUS, TokenType::MINUS_MINUS)){
+        TokenType::PLUS_PLUS, TokenType::MINUS_MINUS, TokenType::TILDE)){
     Token oper = previous(); // ++
     std::shared_ptr<Expr> right = unary(); // var name
 
@@ -282,10 +292,10 @@ std::shared_ptr<Expr> Parser::logicalOr(){
 }
 
 std::shared_ptr<Expr> Parser::logicalAnd(){
-  std::shared_ptr<Expr> expr = equality();
+  std::shared_ptr<Expr> expr = bitwise();
   while(match(TokenType::AND)){
     Token oper = previous();
-    std::shared_ptr<Expr> right = equality();
+    std::shared_ptr<Expr> right = bitwise();
     expr = std::make_shared<Logical>(expr, std::move(oper), right);
   }
   return expr;

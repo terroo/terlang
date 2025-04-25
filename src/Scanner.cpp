@@ -99,6 +99,11 @@ char Scanner::advance(){
 void Scanner::scanToken(){
   char c = advance();
   switch(c){
+    case '&': addToken(TokenType::AMPERSAND); break;
+    case '^': addToken(TokenType::CARET); break;
+    case '|': addToken(TokenType::VBAR); break;
+    case '~': addToken(TokenType::TILDE); break;
+    case '%': addToken(TokenType::PERCENT); break;
     case '(': addToken(TokenType::LEFT_PAREN); break;
     case ')': addToken(TokenType::RIGHT_PAREN); break;
     case '{': addToken(TokenType::LEFT_BRACE); break;

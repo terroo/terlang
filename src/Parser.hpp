@@ -38,6 +38,7 @@ class Parser {
     Token consume(const TokenType&, const std::string&);
 
     std::shared_ptr<Expr> expression();
+    std::shared_ptr<Expr> bitwise();
     std::shared_ptr<Expr> equality();
     std::shared_ptr<Expr> comparison();
     std::shared_ptr<Expr> term();
