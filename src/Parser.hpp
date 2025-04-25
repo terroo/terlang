@@ -41,6 +41,7 @@ class Parser {
     std::shared_ptr<Expr> bitwise();
     std::shared_ptr<Expr> equality();
     std::shared_ptr<Expr> comparison();
+    std::shared_ptr<Expr> shift();
     std::shared_ptr<Expr> term();
     std::shared_ptr<Expr> factor();
     std::shared_ptr<Expr> unary();

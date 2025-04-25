@@ -40,8 +40,18 @@ std::shared_ptr<Expr> Parser::equality(){
 }
 
 std::shared_ptr<Expr> Parser::comparison(){
-  std::shared_ptr<Expr> expr = term();
+  std::shared_ptr<Expr> expr = shift();
   while(match(TokenType::GREATER, TokenType::GREATER_EQUAL, TokenType::LESS, TokenType::LESS_EQUAL)){
+    Token oper = previous();
+    std::shared_ptr<Expr> right = shift();
+    expr = std::make_shared<Binary>(expr, oper, right);
+  }
+  return expr;
+}
+
+std::shared_ptr<Expr> Parser::shift(){
+  std::shared_ptr<Expr> expr = term();
+  while(match(TokenType::GREATER_GREATER, TokenType::LESS_LESS)){
     Token oper = previous();
     std::shared_ptr<Expr> right = term();
     expr = std::make_shared<Binary>(expr, oper, right);
