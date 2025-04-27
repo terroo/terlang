@@ -1,12 +1,11 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include <stdexcept>
-#include "Scanner.hpp"
-#include "Expr.hpp"
-#include "Debug.hpp"
-#include "Stmt.hpp"
-#include "IncludeRun.hpp"
+
+#include "Token.hpp"
+#include "Visitor.hpp"
 
 class Parser {
   private:

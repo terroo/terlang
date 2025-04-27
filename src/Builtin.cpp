@@ -1,5 +1,7 @@
 #include "Builtin.hpp"
+#include "ArrayType.hpp"
 #include <chrono>
+#include <iostream>
 #include <random>
 #include "Helpers.hpp"
 

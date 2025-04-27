@@ -1,6 +1,5 @@
 #pragma once
 #include "Callable.hpp"
-#include "Debug.hpp"
 #include "Interpreter.hpp"
 
 class Clock : public Callable {

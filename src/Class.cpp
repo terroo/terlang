@@ -1,5 +1,8 @@
+#include <iostream>
+
 #include "Class.hpp"
 #include "Instance.hpp"
+#include "Interpreter.hpp"
 
 Class::Class(const std::string& name, std::unordered_map<std::string, std::shared_ptr<Function>> methods) :
   name(name), methods(methods) {}

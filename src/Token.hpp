@@ -1,8 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <any>
-#include <sstream>
+#include <string>
 #include "TokenType.hpp"
 
 class Token {

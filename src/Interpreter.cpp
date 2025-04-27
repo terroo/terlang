@@ -1,8 +1,16 @@
 #include <cmath>
+#include <iostream>
 
 #include "Interpreter.hpp"
-#include "Environment.hpp"
 #include "BuiltinFactory.hpp"
+#include "Expr.hpp"
+#include "Debug.hpp"
+#include "Stmt.hpp"
+#include "Function.hpp"
+#include "Class.hpp"
+#include "Instance.hpp"
+#include "ArrayType.hpp"  
+#include "RuntimeError.hpp"
 
 Interpreter::Interpreter(){
   for(const auto& [name, type] : builtinNames){

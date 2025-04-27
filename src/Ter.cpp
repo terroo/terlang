@@ -1,4 +1,14 @@
+#include <iostream>
+#include <filesystem>
+#include <vector>
+#include <fstream>
+
 #include "Ter.hpp"
+#include "Debug.hpp"
+#include "Scanner.hpp"
+#include "Parser.hpp"
+#include "Interpreter.hpp"
+#include "Resolver.hpp"
 
 namespace fs = std::filesystem;
 

@@ -1,18 +1,10 @@
 #pragma once
 
 #include <cstdint>
+#include <unordered_map>
 
-class Env;
-
-#include "Token.hpp"
-#include "Expr.hpp"
-#include "Debug.hpp"
+#include "Environment.hpp"
 #include "Stmt.hpp"
-#include "Function.hpp"
-#include "Class.hpp"
-#include "Instance.hpp"
-#include "ArrayType.hpp"  
-#include "Builtin.hpp"
 
 struct Return {
   std::any value;

@@ -1,14 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <filesystem>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include "Scanner.hpp"
-#include "Parser.hpp"
-#include "Interpreter.hpp"
-#include "Resolver.hpp"
+#include <string>
 
 class Ter {
   private: 

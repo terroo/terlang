@@ -1,4 +1,6 @@
 #include "Resolver.hpp"
+#include "Debug.hpp"
+#include "Expr.hpp"
 
 Resolver::Resolver(Interpreter& interpreter) :
   interpreter(interpreter) {}

@@ -1,4 +1,5 @@
 #include "Scanner.hpp"
+#include "Debug.hpp"
 
 Scanner::Scanner(const std::string& source) : source(source) {}
 

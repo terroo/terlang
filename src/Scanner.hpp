@@ -1,10 +1,8 @@
 #pragma once
 
-#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include "Token.hpp"
-#include "Debug.hpp"
 
 class Scanner {
   private:

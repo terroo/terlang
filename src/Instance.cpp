@@ -1,4 +1,7 @@
+#include <iostream>
+
 #include "Instance.hpp"
+#include "RuntimeError.hpp"
 #include "Class.hpp"
 
 Instance::Instance(std::shared_ptr<Class> klass) : klass{std::move(klass)} {}

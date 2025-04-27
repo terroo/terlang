@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Ter.hpp"
 #include "Helpers.hpp"
 
