@@ -12,7 +12,13 @@
 #include "ArrayType.hpp"  
 #include "../utils/RuntimeError.hpp"
 
-Interpreter::Interpreter(){
+Interpreter::Interpreter(){}
+
+/* Do not initialize built-ins in constructor.
+   It was causing Static Initialization Order Fiasco (SIOF).
+   Late initialization to be done manually before first use of the class. */
+void Interpreter::lateInitializator()
+{
   for(const auto& [name, type] : builtinNames){
     auto it = builtinFactory.find(type);
     if(it != builtinFactory.end()){

@@ -12,6 +12,7 @@ struct Return {
 
 class Interpreter : public ExprVisitor, public Statement::StmtVisitor {
   public:
+    void lateInitializator();
     std::any visitBinaryExpr(std::shared_ptr<Binary> expr) override;
     std::any visitGroupingExpr(std::shared_ptr<Grouping> expr) override;
     std::any visitLiteralExpr(std::shared_ptr<Literal> expr) override;
