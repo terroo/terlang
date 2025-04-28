@@ -6,3 +6,10 @@ auto build = compiler + " " + add_flags + " " + sanitize + " " + " " + flags + "
 
 output(build)
 exec(build)
+/*
+
+Compile all:
+
+clang++ -stdlib=libc++ -O0 -fno-omit-frame-pointer -Wsign-conversion -Wnull-dereference -Wdouble-promotion -Wformat=2 -Wcast-align -Wconversion -fsanitize=undefined -fsanitize=leak -g -Wall -Werror -Wextra -Wshadow -Wpedantic -fsanitize=address $(find src -name '*.cpp')
+
+*/
