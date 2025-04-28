@@ -3,14 +3,14 @@
 
 #include "Interpreter.hpp"
 #include "BuiltinFactory.hpp"
-#include "Expr.hpp"
-#include "Debug.hpp"
-#include "Stmt.hpp"
+#include "../parser/Expr.hpp"
+#include "../utils/Debug.hpp"
+#include "../parser/Stmt.hpp"
 #include "Function.hpp"
 #include "Class.hpp"
 #include "Instance.hpp"
 #include "ArrayType.hpp"  
-#include "RuntimeError.hpp"
+#include "../utils/RuntimeError.hpp"
 
 Interpreter::Interpreter(){
   for(const auto& [name, type] : builtinNames){

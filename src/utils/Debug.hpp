@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Token.hpp"
+#include "../tokenizer/Token.hpp"
 #include "RuntimeError.hpp"
 
 class Debug {

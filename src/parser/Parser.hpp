@@ -4,7 +4,7 @@
 #include <vector>
 #include <stdexcept>
 
-#include "Token.hpp"
+#include "../tokenizer/Token.hpp"
 #include "Visitor.hpp"
 
 class Parser {

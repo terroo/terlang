@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "Token.hpp"
+#include "../tokenizer/Token.hpp"
 
 class IncludeRun {
   public:

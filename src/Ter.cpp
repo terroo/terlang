@@ -4,11 +4,11 @@
 #include <fstream>
 
 #include "Ter.hpp"
-#include "Debug.hpp"
-#include "Scanner.hpp"
-#include "Parser.hpp"
-#include "Interpreter.hpp"
-#include "Resolver.hpp"
+#include "utils/Debug.hpp"
+#include "tokenizer/Scanner.hpp"
+#include "parser/Parser.hpp"
+#include "interpreter/Interpreter.hpp"
+#include "interpreter/Resolver.hpp"
 
 namespace fs = std::filesystem;
 

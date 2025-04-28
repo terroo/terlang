@@ -3,7 +3,7 @@
 
 #include "Parser.hpp"
 #include "Expr.hpp"
-#include "Debug.hpp"
+#include "../utils/Debug.hpp"
 #include "Stmt.hpp"
 #include "IncludeRun.hpp"
 

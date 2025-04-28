@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Environment.hpp"
-#include "RuntimeError.hpp"
+#include "../utils/RuntimeError.hpp"
 
 Env::Env() : enclosing{nullptr} {}
 

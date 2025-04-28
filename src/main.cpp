@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Ter.hpp"
-#include "Helpers.hpp"
+#include "utils/Helpers.hpp"
 
 void help(const std::string& prog){
   std::cerr << "Ter/Terlang v0.1.1\n\n";
