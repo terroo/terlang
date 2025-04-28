@@ -1,4 +1,11 @@
+#include <filesystem>
+#include <fstream>
+#include <algorithm>
+#include <iostream>
+
 #include "IncludeRun.hpp"
+#include "../utils/Debug.hpp"
+#include "../tokenizer/Scanner.hpp"
 
 namespace fs = std::filesystem;
 

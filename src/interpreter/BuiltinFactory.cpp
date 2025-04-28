@@ -1,4 +1,5 @@
 #include "BuiltinFactory.hpp"
+#include "Builtin.hpp"
 
 // Map to store built-in function factories
 std::unordered_map<std::type_index, std::function<std::shared_ptr<Callable>()>> builtinFactory = {

@@ -1,4 +1,12 @@
+#include <iostream>
+#include <algorithm>
+
 #include "Parser.hpp"
+#include "Expr.hpp"
+#include "../utils/Debug.hpp"
+#include "Stmt.hpp"
+#include "IncludeRun.hpp"
+
 #define assert(E)
 
 Parser::Parser(const std::vector<Token>& tokens) : tokens(tokens) {}

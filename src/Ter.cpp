@@ -1,4 +1,14 @@
+#include <iostream>
+#include <filesystem>
+#include <vector>
+#include <fstream>
+
 #include "Ter.hpp"
+#include "utils/Debug.hpp"
+#include "tokenizer/Scanner.hpp"
+#include "parser/Parser.hpp"
+#include "interpreter/Interpreter.hpp"
+#include "interpreter/Resolver.hpp"
 
 namespace fs = std::filesystem;
 
@@ -67,6 +77,7 @@ void Ter::run(const std::string& source){
   std::vector<std::shared_ptr<Statement::Stmt>> statements = parser->parse();
   if(Debug::hadError){ return; }
 
+  interpreter.lateInitializator();
   Resolver resolver{interpreter};
   resolver.resolve(statements);
   if(Debug::hadError){ return; }

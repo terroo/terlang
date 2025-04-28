@@ -1,11 +1,7 @@
 #pragma once
 
-class Function;
-
-#include <optional>
-#include "Token.hpp"
 #include "Callable.hpp"
-#include "Function.hpp"
+#include "Interpreter.hpp"
 #include <memory>
 #include <unordered_map>
 

@@ -1,8 +1,7 @@
 #pragma once
-#include <iostream>
-#include "Token.hpp"
+#include <string>
+#include "../tokenizer/Token.hpp"
 #include "RuntimeError.hpp"
-#include <vector>
 
 class Debug {
   private:

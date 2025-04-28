@@ -8,9 +8,18 @@ project(Terlang
   VERSION 0.0.1
 )
 
-file(GLOB MY_SRC "src/*.cpp")
+add_executable(ter src/main.cpp src/Ter.cpp)
 
-add_executable(ter ${MY_SRC})
+# Add sources by module
+function(add_sources module)
+    file(GLOB sources "src/${module}/*.cpp")
+    target_sources(ter PRIVATE ${sources})
+endfunction()
+
+add_sources(tokenizer)
+add_sources(utils)
+add_sources(interpreter)
+add_sources(parser)
 
 install(TARGETS ter DESTINATION bin)
 

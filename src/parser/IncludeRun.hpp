@@ -1,10 +1,6 @@
-#include <iostream>
-#include <filesystem>
 #include <vector>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
-#include "Scanner.hpp"
+
+#include "../tokenizer/Token.hpp"
 
 class IncludeRun {
   public:

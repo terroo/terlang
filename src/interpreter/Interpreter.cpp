@@ -1,10 +1,24 @@
 #include <cmath>
+#include <iostream>
 
 #include "Interpreter.hpp"
-#include "Environment.hpp"
 #include "BuiltinFactory.hpp"
+#include "../parser/Expr.hpp"
+#include "../utils/Debug.hpp"
+#include "../parser/Stmt.hpp"
+#include "Function.hpp"
+#include "Class.hpp"
+#include "Instance.hpp"
+#include "ArrayType.hpp"  
+#include "../utils/RuntimeError.hpp"
 
-Interpreter::Interpreter(){
+Interpreter::Interpreter(){}
+
+/* Do not initialize built-ins in constructor.
+   It was causing Static Initialization Order Fiasco (SIOF).
+   Late initialization to be done manually before first use of the class. */
+void Interpreter::lateInitializator()
+{
   for(const auto& [name, type] : builtinNames){
     auto it = builtinFactory.find(type);
     if(it != builtinFactory.end()){

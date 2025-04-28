@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Visitor.hpp"
-#include "Token.hpp"
+#include "../tokenizer/Token.hpp"
 #include <vector>
 
 namespace Statement {

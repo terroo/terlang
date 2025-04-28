@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Interpreter.hpp"
-#include "Stmt.hpp"
-#include "Callable.hpp"
-#include "Environment.hpp"
 #include <optional>
+#include <string>
+#include <unordered_map>
 #include "Function.hpp"
 
 class Instance;

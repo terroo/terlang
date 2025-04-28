@@ -1,4 +1,5 @@
 #include "Debug.hpp"
+#include <iostream>
 
 void Debug::report(int line, const std::string& where, const std::string& message){
   hadError = true;

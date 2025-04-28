@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <any>
 #include <memory>
-#include "Debug.hpp"
-#include "Token.hpp"
+
+#include "../tokenizer/Token.hpp"
 
 class Env : public std::enable_shared_from_this<Env> {
   private:

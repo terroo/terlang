@@ -1,7 +1,9 @@
 #include "Builtin.hpp"
+#include "ArrayType.hpp"
 #include <chrono>
+#include <iostream>
 #include <random>
-#include "Helpers.hpp"
+#include "../utils/Helpers.hpp"
 
 void builtinError(const std::string& nameBuiltin){
     std::cerr << "Builtin '" << nameBuiltin << "' function error.\n";

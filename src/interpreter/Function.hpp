@@ -5,7 +5,7 @@
 
 class Interpreter;
 
-#include "Stmt.hpp"
+#include "../parser/Stmt.hpp"
 #include "Callable.hpp"
 #include "Environment.hpp"
 
