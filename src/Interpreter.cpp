@@ -205,12 +205,20 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
     case TokenType::GREATER_EQUAL:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) >= std::any_cast<double>(right);
+    case TokenType::GREATER_GREATER:
+      i_left = doubleToInt(expr->oper,left);
+      i_right = doubleToInt(expr->oper,right);
+      return static_cast<double>(i_left >> i_right);
     case TokenType::LESS:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) < std::any_cast<double>(right);
     case TokenType::LESS_EQUAL:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) <= std::any_cast<double>(right);
+    case TokenType::LESS_LESS:
+      i_left = doubleToInt(expr->oper,left);
+      i_right = doubleToInt(expr->oper,right);
+      return static_cast<double>(i_left << i_right);
     case TokenType::MINUS:
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) - std::any_cast<double>(right);

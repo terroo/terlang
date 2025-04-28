@@ -133,9 +133,22 @@ void Scanner::scanToken(){
     case '=':
               addToken(match('=') ? TokenType::EQUAL_EQUAL : TokenType::EQUAL); break;
     case '<':
-              addToken(match('=') ? TokenType::LESS_EQUAL : TokenType::LESS); break;
+              if (match('=')) {
+                addToken(TokenType::LESS_EQUAL);
+              }else if (match('<')) {
+                addToken(TokenType::LESS_LESS);
+              }else {
+                addToken(TokenType::LESS);
+              }
+              break;
     case '>':
-              addToken(match('=') ? TokenType::GREATER_EQUAL : TokenType::GREATER);
+              if (match('=')) {
+                addToken(TokenType::GREATER_EQUAL);
+              }else if (match('>')) {
+                addToken(TokenType::GREATER_GREATER);
+              }else {
+                addToken(TokenType::GREATER);
+              }
               break;
     case '/':
               if(match('/')){
