@@ -90,7 +90,7 @@ std::shared_ptr<Expr> Parser::unary(){
     }
     matchVoid(TokenType::SEMICOLON);
 
-    return std::make_shared<Unary>(oper, right);
+    return std::make_shared<Unary>(oper, right, false);
   }
   return call();
 }
@@ -105,7 +105,7 @@ std::shared_ptr<Expr> Parser::primary(){
     if (match(TokenType::PLUS_PLUS, TokenType::MINUS_MINUS)) {
       Token oper = previous();
       matchVoid(TokenType::SEMICOLON);
-      return std::make_shared<Unary>(oper, left);
+      return std::make_shared<Unary>(oper, left, true);
     }
     return left;
   }

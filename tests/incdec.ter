@@ -1,0 +1,9 @@
+auto a=1
+output("    Increment")
+  out(a++) out("|")
+  out(a) out("|")
+  output(++a)
+output("    Decrement")
+  out(a--) out("|")
+  out(a) out("|")
+  output(--a)

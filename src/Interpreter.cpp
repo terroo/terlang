@@ -29,6 +29,9 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
       if (auto varExpr = std::dynamic_pointer_cast<Variable>(expr->right)) {
         curr_env->assign(varExpr->name, right);
       }
+      if (expr->isPostOperator) {
+        return std::any_cast<double>(right) - 1;
+      }
       return right;
 
     case TokenType::MINUS_MINUS:
@@ -36,6 +39,9 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
       right = std::any_cast<double>(right) - 1;
       if (auto varExpr = std::dynamic_pointer_cast<Variable>(expr->right)) {
         curr_env->assign(varExpr->name, right);
+      }
+      if (expr->isPostOperator) {
+        return std::any_cast<double>(right) + 1;
       }
       return right;
 
