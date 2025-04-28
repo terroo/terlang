@@ -4,7 +4,7 @@
 #include "utils/Helpers.hpp"
 
 void help(const std::string& prog){
-  std::cerr << "Ter/Terlang v0.1.1\n\n";
+  std::cerr << "Ter/Terlang v0.1.6\n\n";
   std::cerr << "Usage: \n\t" <<
     prog << " [filename].ter\n\t" << 
     prog << " -e '<script>'\n";
