@@ -1,0 +1,41 @@
+auto a = "str"
+auto b = "5"
+auto c = 5
+
+output("    #1")
+if (a == "str") {out("true ")}else{out("false")} output(" a == 'str'")
+if (a != "str") {out("true ")}else{out("false")} output(" a != 'str'")
+if (c == 5) {out("true ")}else{out("false")}output(" c == 5")
+if (c != 5) {out("true ")}else{out("false")}output(" c != 5")
+if (c > 5) {out("true ")}else{out("false")}output(" c > 5")
+if (c >= 5) {out("true ")}else{out("false")}output(" c >= 5")
+if (c < 5) {out("true ")}else{out("false")}output(" c < 5")
+if (c <= 5) {out("true ")}else{out("false")}output(" c <= 5")
+
+output("    #2")
+if (b == to_string(c)) {out("true ")}else{out("false")}output(" b == to_string(c)")
+if (nil == nil) {out("true ")}else{out("false")}output(" nil == nil")
+if (nil) {out("true ")}else{out("false")}output(" nil")
+if (5) {out("true ")}else{out("false")}output(" 5")
+if (0) {out("true ")}else{out("false")}output(" 0")
+if ("string") {out("true ")}else{out("false")}output(" 'string'")
+if ("") {out("true ")}else{out("false")}output(" ''")
+
+output("    #3")
+if (nil or 1) {out("true ")}else{out("false")}output(" nil or 1")
+if (1 and 1) {out("true ")}else{out("false")}output(" 1 and 1")
+if (nil or nil) {out("true ")}else{out("false")}output(" nil or nil")
+if (1 and nil) {out("true ")}else{out("false")}output(" 1 and nil")
+
+output("    #4")
+if (!nil) {out("true ")}else{out("false")}output(" !nil")
+if (!a) {out("true ")}else{out("false")}output(" !a")
+if (!c) {out("true ")}else{out("false")}output(" !c")
+if (!0) {out("true ")}else{out("false")}output(" !0")
+if (!"") {out("true ")}else{out("false")}output(" !''")
+
+output("    #5")
+if (!(nil or 1)) {out("true ")}else{out("false")}output(" !(nil or 1)")
+if (!(1 and 1)) {out("true ")}else{out("false")}output(" !(1 and 1)")
+if (!(nil or nil)) {out("true ")}else{out("false")}output(" !(nil or nil)")
+if (!(1 and nil)) {out("true ")}else{out("false")}output(" !(1 and nil)")

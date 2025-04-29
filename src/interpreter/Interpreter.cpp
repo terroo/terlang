@@ -77,6 +77,13 @@ bool Interpreter::isTruthy(const std::any& object){
   if(object.type() == typeid(bool)){
     return std::any_cast<bool>(object);
   }
+  if(object.type() == typeid(double)){
+    return std::any_cast<double>(object) != 0.0;
+  }
+  if(object.type() == typeid(std::string)){
+    return !std::any_cast<std::string>(object).empty();
+  }
+  // never
   return true;
 }
 
@@ -276,7 +283,6 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
       checkNumberOperands(expr->oper, left, right);
       return std::any_cast<double>(left) / std::any_cast<double>(right);
     case TokenType::BANG_EQUAL:
-      checkNumberOperands(expr->oper, left, right);
       return !isEqual(left, right);
     case TokenType::EQUAL_EQUAL:
       return isEqual(left, right);
