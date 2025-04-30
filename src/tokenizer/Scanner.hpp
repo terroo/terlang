@@ -6,9 +6,9 @@
 
 class Scanner {
   private:
-    int start = 0;
-    int current = 0;
-    int line = 1;
+    std::string::size_type start = 0;
+    std::string::size_type current = 0;
+    std::string::size_type line = 1;
     std::string source;
     std::vector<Token> tokens;
     std::unordered_map<std::string, TokenType> keywords = {
