@@ -35,6 +35,7 @@ class Scanner {
     bool isAlpha(char c);
     bool isDigit(char c);
     bool isAlphaNumeric(char c);
+    bool isHex(char c);
     bool match(char expected);
     void scanToken();
     char advance();
@@ -42,6 +43,7 @@ class Scanner {
     void addToken(TokenType type, std::any literal);
     char peek();
     char peekNext();
+    std::string getUnicodeEscapedChar();
     void string();
     void number();
     void identifier();
