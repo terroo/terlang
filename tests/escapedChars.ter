@@ -1,0 +1,8 @@
+output("    String in utf-8")
+output("Aaçaẞa☕中𐞀a")
+output("    C style")
+output("a\tb\nc\\d\'e\"f\?g")
+output("   Unknow simple")
+output("a\zb\xFFc")
+output("   Unicode")
+output("\x{41}a\x{e7}a\x{1E9E}a\u{2615}\x{4e2d}\x{10780}a")
