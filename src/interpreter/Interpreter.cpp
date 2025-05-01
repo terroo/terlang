@@ -148,18 +148,7 @@ std::string Interpreter::stringify(const std::any& object){
   }
 
   if (object.type() == typeid(std::string)) {
-    std::string result = std::any_cast<std::string>(object);
-
-    // Replace the "\n" and "\r" sequences with real newlines and carriage returns
-    size_t pos;
-    while ((pos = result.find("\\n")) != std::string::npos) {
-      result.replace(pos, 2, "\n");
-    }
-    while ((pos = result.find("\\r")) != std::string::npos) {
-      result.replace(pos, 2, "\r");
-    }
-
-    return result;
+    return std::any_cast<std::string>(object);
   }
 
   if(object.type() == typeid(bool)){
