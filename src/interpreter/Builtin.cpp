@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include "../utils/Helpers.hpp"
+#include "../utils/FormatString.hpp"
 
 void builtinError(const std::string& nameBuiltin){
     std::cerr << "Builtin '" << nameBuiltin << "' function error.\n";
@@ -92,15 +93,7 @@ std::any ToString::call(Interpreter &interpreter, std::vector<std::any> argument
   if(arguments.size() > (size_t)arity() && interpreter.global != nullptr){
     builtinError("to_string");
   }
-
-  if(!arguments[0].has_value() || arguments[0].type() != typeid(double)){
-    builtinError("to_string");
-  }
-
-  int terint = static_cast<int>(std::any_cast<double>(arguments[0]));
-  std::string str = std::to_string(std::any_cast<int>(terint));
-
-  return std::any_cast<std::string>(str);
+  return FormatString::stringify(arguments[0]);
 }
 
 std::string ToString::toString(){

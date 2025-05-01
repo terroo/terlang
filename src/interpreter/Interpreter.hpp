@@ -53,7 +53,6 @@ class Interpreter : public ExprVisitor, public Statement::StmtVisitor {
     int64_t doubleToInt(const Token& oper, const std::any& value);
     bool isTruthy(const std::any& object);
     bool isEqual(const std::any& a, const std::any& b);
-    std::string stringify(const std::any& object);
     std::any evaluate(std::shared_ptr<Expr> expr);
 
     std::unordered_map<std::shared_ptr<Expr>, int> locals;

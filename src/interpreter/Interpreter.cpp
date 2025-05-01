@@ -11,6 +11,7 @@
 #include "Instance.hpp"
 #include "ArrayType.hpp"  
 #include "../utils/RuntimeError.hpp"
+#include "../utils/FormatString.hpp"
 
 Interpreter::Interpreter(){}
 
@@ -136,71 +137,6 @@ bool Interpreter::isEqual(const std::any& a, const std::any& b){
   return false;
 }
 
-std::string Interpreter::stringify(const std::any& object){
-  if(object.type() == typeid(nullptr)) return "nil";
-
-  if(object.type() == typeid(double)){
-    std::string text = std::to_string(std::any_cast<double>(object));
-    if(text[text.length() - 7] == '.' && text[text.length() - 6] == '0'){
-      text = text.substr(0, text.length() - 7);
-    }
-    return text;
-  }
-
-  if (object.type() == typeid(std::string)) {
-    return std::any_cast<std::string>(object);
-  }
-
-  if(object.type() == typeid(bool)){
-    if(std::any_cast<bool>(object)){
-      std::string result{"true"};
-      return result;
-    }else{
-      std::string result{"false"};
-      return result;
-    }
-  }
-
-  if(object.type() == typeid(std::shared_ptr<Function>)){
-    std::shared_ptr<Callable> function;
-    function = std::any_cast<std::shared_ptr<Function>>(object);
-    return function->toString();
-  }
-
-  if(object.type() == typeid(std::shared_ptr<Instance>)){
-    auto instance = std::any_cast<std::shared_ptr<Instance>>(object);
-    return instance->toString();
-  }
-
-  if(object.type() == typeid(std::shared_ptr<Callable>)){
-    auto callable = std::any_cast<std::shared_ptr<Callable>>(object);
-    return callable->toString();
-  }
-
-  if(object.type() == typeid(std::shared_ptr<Class>)){
-    auto klass = std::any_cast<std::shared_ptr<Class>>(object);
-    return klass->toString();
-  }
-
-  if(object.type() == typeid(std::shared_ptr<ArrayType>)){
-    std::string result = "[";
-    std::shared_ptr<ArrayType> list;
-    list = std::any_cast<std::shared_ptr<ArrayType>>(object);
-    auto values = list->values;
-    for (auto i = values.begin(); i != values.end(); ++i) {
-      auto next = i + 1;
-      result.append(stringify(*i));
-      if (next != values.end()) {
-        result.append(", ");
-      }
-    }
-    result.append("]");
-    return result;
-  }
-
-  return "stringify: cannot reconize type";
-}
-
 std::any Interpreter::visitGroupingExpr(std::shared_ptr<Grouping> expr){
   return evaluate(expr->expression);
 }
@@ -301,13 +237,13 @@ std::any Interpreter::visitExpressionStmt(std::shared_ptr<Statement::Expression>
 
 std::any Interpreter::visitPrintStmt(std::shared_ptr<Statement::Print> stmt){
   std::any value = evaluate(stmt->expression);
-  std::cout << stringify(value) << '\n';
+  std::cout << FormatString::stringify(value) << '\n';
   return {};
 }
 
 std::any Interpreter::visitOutStmt(std::shared_ptr<Statement::Out> stmt){
   std::any value = evaluate(stmt->expression);
-  std::cout << stringify(value);
+  std::cout << FormatString::stringify(value);
   return {};
 }
 
