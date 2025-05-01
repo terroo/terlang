@@ -45,7 +45,7 @@ class Scanner {
     char peekNext();
     std::string getUnicodeEscapedChar();
     void string();
-    void number();
+    void number(char firstChar);
     void identifier();
 
   public:

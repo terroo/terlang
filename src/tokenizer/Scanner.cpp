@@ -33,10 +33,33 @@ void Scanner::identifier(){
   addToken(type);
 }
 
-void Scanner::number(){
-  while(isDigit(peek())) advance();
+void Scanner::number(char firstChar){
+  bool inputHex = false;
 
-  if(peek() == '.' && isDigit(peekNext())){
+  if (firstChar == '0' && (peek() == 'x' || peek() == 'X')) {
+    // Get hexadecimal integer part
+    inputHex = true;
+    advance();
+    while(isHex(peek())) advance();
+  } else {
+    // Get decimal integer part
+    while(isDigit(peek())) advance();
+  }
+
+  if(!inputHex && peek() == '.' && isDigit(peekNext())){
+    // Get decimal fractional part
+    advance();
+    while(isDigit(peek())) advance();
+  }
+  if(inputHex && peek() == '.' && isHex(peekNext())){
+    // Get hexadecimal fractional part
+    advance();
+    while(isHex(peek())) advance();
+  }
+
+  if(!inputHex && (peek() == 'e' || peek() == 'E') && (isDigit(peekNext()) || peekNext() == '-')){
+    // Get decimal scientific notation
+    if (peekNext() == '-') advance();
     advance();
     while(isDigit(peek())) advance();
   }
@@ -281,7 +304,7 @@ void Scanner::scanToken(){
               break;
     default:
               if(isDigit(c)){
-                number();
+                number(c);
               }else if(isAlpha(c)){
                 identifier();
               }else{

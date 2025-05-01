@@ -1,0 +1,4 @@
+output("    Integers")
+out(1)out("|")out(-1)out("|")out(10)out("|")out(-0Xff)out("|")out(1e10)out("|")out(-1230E-1)output("|")
+output("    Fractional")
+out(0.1)out("|")out(-1.6)out("|")out(100.1234)out("|")out(-0xff.f)out("|")out(1.2345e10)out("|")out(-1234e-4)output("|")
