@@ -1,0 +1,33 @@
+    #1
+true  a == 'str'
+false a != 'str'
+true  c == 5
+false c != 5
+false c > 5
+true  c >= 5
+false c < 5
+true  c <= 5
+    #2
+true  b == to_string(c)
+true  nil == nil
+false nil
+true  5
+false 0
+true  'string'
+false ''
+    #3
+true  nil or 1
+true  1 and 1
+false nil or nil
+false 1 and nil
+    #4
+true  !nil
+false !a
+false !c
+true  !0
+true  !''
+    #5
+false !(nil or 1)
+false !(1 and 1)
+true  !(nil or nil)
+true  !(1 and nil)

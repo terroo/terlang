@@ -1,0 +1,9 @@
+    String in utf-8
+Aaçaẞa☕中𐞀a
+    C style
+a	b
+c\d'e"f?g
+   Unknow simple
+abFFc
+   Unicode
+Aaçaẞa☕中𐞀a

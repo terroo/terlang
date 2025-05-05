@@ -1,16 +1,25 @@
 cmake_minimum_required(VERSION 3.25.0)
 
 set (CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -ffast-math")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 project(Terlang
   LANGUAGES CXX
   VERSION 0.0.1
 )
 
-file(GLOB MY_SRC "src/*.cpp")
+add_executable(ter src/main.cpp src/Ter.cpp)
 
-add_executable(ter ${MY_SRC})
+# Add sources by module
+function(add_sources module)
+    file(GLOB sources "src/${module}/*.cpp")
+    target_sources(ter PRIVATE ${sources})
+endfunction()
+
+add_sources(tokenizer)
+add_sources(utils)
+add_sources(interpreter)
+add_sources(parser)
 
 install(TARGETS ter DESTINATION bin)
 
