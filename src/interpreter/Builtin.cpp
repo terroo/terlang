@@ -158,3 +158,23 @@ std::any Exec::call(Interpreter &interpreter, std::vector<std::any> arguments){
 std::string Exec::toString(){
   return "<function builtin>";
 }
+
+// ------ Input -----------
+int Input::arity() {
+  return 0;
+}
+
+std::any Input::call(Interpreter &interpreter, std::vector<std::any> arguments) {
+  if (arguments.size() > (size_t)arity() && interpreter.global != nullptr) {
+    builtinError("input");
+  }
+
+  std::string input;
+  std::getline(std::cin, input);
+
+  return std::any(input);
+}
+
+std::string Input::toString() {
+  return "<function builtin>";
+}
