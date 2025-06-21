@@ -43,3 +43,10 @@ class Exec : public Callable {
     std::any call(Interpreter &interpreter, std::vector<std::any> arguments) override;
     std::string toString() override;
 };
+
+class Input : public Callable {
+  public:
+    int arity() override;
+    std::any call(Interpreter &interpreter, std::vector<std::any> arguments) override;
+    std::string toString() override;
+};
